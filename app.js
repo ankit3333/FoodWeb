@@ -6,14 +6,14 @@ var express     = require("express"),
     passport    = require("passport"),
     localStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    Campground  = require("./models/campground"),
+    Dish  = require("./models/dish"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds");
     
 
 var commentRoutes      = require("./routes/comments"),
-    campgroundRoutes   = require("./routes/campgrounds"),
+    dishRoutes   = require("./routes/dishes"),
     indexRoutes        = require("./routes/index");
 
 var url= process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
@@ -38,6 +38,7 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.locals.moment = require('moment');
 
 app.use(function(req, res ,next){
     res.locals.currentUser = req.user;
@@ -47,10 +48,10 @@ app.use(function(req, res ,next){
 });
 
 app.use("/",indexRoutes);
-app.use("/campgrounds/:id/comments",commentRoutes);
-app.use("/campgrounds",campgroundRoutes);
+app.use("/dishes/:id/comments",commentRoutes);
+app.use("/dishes",dishRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+   console.log("The FoodWeb Server Has Started!");
 });

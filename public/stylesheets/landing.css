@@ -10,8 +10,8 @@ body {
   padding-top: 40vh;
 }
 
-#landing-header:h1 {
-  color: #fff;
+#landing-header{
+  color: white;
 }
 
 .slideshow { 
@@ -41,22 +41,22 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(https://images.unsplash.com/photo-1453831362806-3d5577f014a4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9dd8da96be0724ab84e4147d428f6bba&auto=format&fit=crop&w=2238&q=80);
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  background-image: url(https://static.pexels.com/photos/54455/cook-food-kitchen-eat-54455.jpeg);
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  background-image: url(https://static.pexels.com/photos/326279/pexels-photo-326279.jpeg);
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  background-image: url(https://static.pexels.com/photos/8313/food-eating-potatoes-beer-8313.jpg);
   animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  background-image: url(https://static.pexels.com/photos/106343/pexels-photo-106343.jpeg);
   animation-delay: 40s; 
 }
 

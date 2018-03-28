@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+
+
+<div class="row">
+<h1 style="text-align:center;">Add a New Dish</h1>
+<div style="width:30% ; margin: 30px auto;">
+<form action="/dishes" method="POST">
+    <div class="form-group">
+        <label for="name">Name of the Dish:</label>
+    <input class="form-control" type="text" name="name" placeholder="name">
+    </div>
+    <div class="form-group">
+        <label for="price">Ratings for the dish:</label>
+    <input class="form-control" type="number" name="price" placeholder="ratings" min="0.5" max="5" step="0.5">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Url:</label>
+    <input class="form-control"  type="text" name="image" placeholder="image url">
+    </div>
+    <div class="form-group">
+        <label for="description">Review:</label>
+    <textarea class="form-control"  type="text" name="description" placeholder="Add your Review"></textarea>
+    </div>
+    <div class="form-group">
+    <label for="location">Location:</label>
+    <input class="form-control" type="text" name="location" id="location" placeholder="Leonardi's Pizzeria, Buffalo">
+    </div>
+    <div class="form-group">
+    <button class="btn btn-lg btn-default btn-primary btn-block">Submit</button>
+    </div>
+</form>
+<a href="/dishes">Go Back</a>
+</div>
+</div>
+
+<% include ../partials/footer %>
+

@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+    <div class="row">
+        <h1 style="text-align: center">Edit <%= dish.name %></h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/dishes/<%=dish._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label for="name">Name of the Dish:</label>
+                    <input class="form-control" type="text" name="name" id="name" value="<%= dish.name %>">
+                </div>
+                <div class="form-group">
+                    <label for="image">Image Url:</label>
+                    <input class="form-control" type="text" name="image" id="image" placeholder="https://images.unsplash.com/..." value="<%= dish.image %>">
+                    
+                </div>
+                <div class="form-group">
+                    <label for="price">Ratings:</label>
+                    <input class="form-control" type="number" name="price" id="price" value="<%= dish.price %>" step="0.5" min="0.5" max="5">
+                </div>
+                <div class="form-group">
+                    <label for="description">Review:</label>
+                    <input class="form-control" type="text" name="description" id="description" value="<%= dish.description %>"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input class="form-control" type="text" name="location" id="location" value="<%= dish.location %>">
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Update!</button>
+                </div>
+            </form>
+            <a href="/dishes">Go Back</a>
+        </div>
+    </div>
+<% include ../partials/footer %>
+
