@@ -15,26 +15,82 @@ var geocoder = NodeGeocoder(options);
 
 //INDEX - show all dishes
 router.get("/", function(req, res){
-    if(req.query.search){
-       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        Dish.find({name: regex}, function(err, allDishes){
+    var numofdishes =8;
+    var integer = parseInt(req.query.page);
+    var pno = integer ? integer : 1;
+    var notFound = null;
+      if(req.query.search_res){
+       const regex = new RegExp(escapeRegex(req.query.search_res), 'gi');
+          Dish.find({restaurant: regex}).skip((numofdishes * pno) - numofdishes).limit(numofdishes).exec(function (err, allDishes) {
+              if(err){
+                  console.log(err);
+              }
+            Dish.count({name: regex}).exec(function (err, count){            
        if(err){
            console.log(err);
        } else {
-          res.render("dishes/index",{dishes:allDishes , page:'dishes'});
+           if(allDishes.length < 1) {
+                  notFound = "No search matches found, please search again."; 
+              }
+          res.render("dishes/index",{
+              dishes:allDishes , 
+              current:pno,
+              pages: Math.ceil(count / numofdishes),
+              notFound: notFound,
+              search:req.query.search_res
+              
+          });
        }
     });
+          });
+    }
+    else if(req.query.search){
+       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+          Dish.find({name: regex}).skip((numofdishes * pno) - numofdishes).limit(numofdishes).exec(function (err, allDishes) {
+              if(err){
+                  console.log(err);
+              }
+            Dish.count({name: regex}).exec(function (err, count){            
+       if(err){
+           console.log(err);
+       } else {
+           if(allDishes.length < 1) {
+                  notFound = "No search matches found, please search again.";
+              }
+          res.render("dishes/index",{
+              dishes:allDishes , 
+              current:pno,
+              pages: Math.ceil(count / numofdishes),
+              notFound: notFound,
+              search:req.query.search
+              
+          });
+       }
+    });
+          });
     }else{
     // Get all dishes from DB
-    Dish.find({}, function(err, allDishes){
+      Dish.find().skip((numofdishes * pno) - numofdishes).limit(numofdishes).exec(function (err, allDishes) {
+          if(err){
+              print(err);
+          }
+            Dish.count().exec(function (err, count){ 
        if(err){
-           console.log(err);
+           print(err);
        } else {
-          res.render("dishes/index",{dishes:allDishes , page:'dishes'});
-       }
+          res.render("dishes/index",{dishes:allDishes , current:pno,
+              pages: Math.ceil(count / numofdishes),
+              notFound: notFound,
+              search:false
+       });
+            }
     });
-    }
+    });
+}
 });
+
+
+
 
 //CREATE - add new dish to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
@@ -43,6 +99,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
   var image = req.body.image;
   var price= req.body.price;
   var desc = req.body.description;
+  var rest=req.body.restaurant;
   var author = {
       id: req.user._id,
       username: req.user.username
@@ -56,7 +113,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
      var lat = data[0].latitude;
      var lng = data[0].longitude;
      var location = data[0].formattedAddress;
-    var newDish = {name: name, price:price,image: image, description: desc, author:author,location: location, lat: lat, lng: lng};
+    var newDish = {name: name, price:price,image: image, description: desc,restaurant: rest, author:author,location: location, lat: lat, lng: lng};
     // Create a new dish and save to DB
     Dish.create(newDish, function(err, newlyCreated){
         if(err){
@@ -77,14 +134,16 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 // SHOW - shows more info about one dish
 router.get("/:id", function(req, res){
     //find the dish with provided ID
-    Dish.findById(req.params.id).populate("comments").exec( function(err, foundDish){
+    Dish.findById(req.params.id).populate("comments").populate("likes").exec( function(err, foundDish){
         if(err){
             console.log(err);
         } else {
             //render show template with that dish
+            
             res.render("dishes/show", {dish: foundDish});
         }
     });
+    
 });
 //EDIT DISH ROUTE
 
@@ -108,7 +167,7 @@ router.put("/:id", middleware.checkDishOwnership, function(req, res){
      var lat = data[0].latitude;
      var lng = data[0].longitude;
      var location = data[0].formattedAddress;
-     var newData = {name: req.body.name, image: req.body.image, price:req.body.price, description: req.body.description, location: location, lat: lat, lng: lng};
+     var newData = {name: req.body.name, image: req.body.image, price:req.body.price, description: req.body.description, restaurant:req.body.restaurant,location: location, lat: lat, lng: lng};
     Dish.findByIdAndUpdate(req.params.id, newData, function(err, dish){
         if(err){
             req.flash("error", err.message);
@@ -132,6 +191,7 @@ router.delete("/:id",middleware.checkDishOwnership,function(req,res){
        }
    });
 });
+
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

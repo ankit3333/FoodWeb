@@ -7,6 +7,7 @@ var dishSchema = new mongoose.Schema({
    price: Number,
    image: String,
    description: String,
+   restaurant:String,
    location:String,
    lat:Number,
    lng:Number,
@@ -22,6 +23,12 @@ var dishSchema = new mongoose.Schema({
     {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment"
+    }   
+    ],
+    likes:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like"
     }   
     ]
 });

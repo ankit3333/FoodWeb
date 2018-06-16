@@ -47,6 +47,18 @@ middlewareObj.checkCommentOwnership = function(req,res,next){
     }
 }
 
+
+
+middlewareObj.checkLikeOwnership = function(req,res,next){
+     if(req.isAuthenticated()){
+      //Later like post
+      
+    }else{
+        req.flash("error", "Please Login First.")
+        res.redirect("back");
+    }
+}
+
 middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();

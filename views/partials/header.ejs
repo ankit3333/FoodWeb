@@ -18,19 +18,21 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/">FoodWeb</a>
+           <!--<a class="navbar-brand" href="/" style = "background-color: rgb(193,205,193);font-weight:bold;"><font size = "+2">FoodWeb</font></a>-->
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="<%= typeof page !== 'undefined' && page === 'dishes' ? 'active' : '' %>"><a href="/dishes">Home</a></li>
+            <li class="<%= typeof page !== 'undefined' && page === 'dishes' ? 'active' : '' %>"><a href="/" style = " font-weight:bold;" ><font size = "+1.5">FoodWeb</font></a></li>
+            <li class="<%= typeof page !== 'undefined' && page === 'dishes' ? 'active' : '' %>"><a href="/dishes" style = " font-weight:bold;" ><font size = "+1.5">Home</font></a></li>
+              <li class="<%= typeof page !== 'undefined' && page === 'dishes' ? 'active' : '' %>"><a href="/about" style = " font-weight:bold;" ><font size = "+1.5">About</font></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <% if(!currentUser){ %>
-                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
-                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login" style = "font-weight:bold;"><font size = "+1.5">Login</font></a></li>
+                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register" style = "font-weight:bold;"><font size = "+1.5">Sign Up</font></a></li>
               <% } else { %>
-                  <li><a href="#">Signed in as <%= currentUser.username %></a></li>
-                  <li><a href="/logout">Logout</a></li>
+                  <li class ="buttonback"><a href="#" style = "font-weight:bold;"><font size = "+1.5"> Signed in as <%= currentUser.username %></font></a></li>
+                  <li><a href="/logout" style ="font-weight:bold;"><font size = "+1.5"> Logout</font></font></a></li>
               <% } %>
           </ul>
         </div>

@@ -3,7 +3,7 @@
   <div class="col-md-3">
     <p class="lead">FoodWeb</p>
     <div class="list-group">
-      <li class="list-group-item active">Info 1</li>
+      <li class="list-group-item active">Location</li>
 
     </div>
     <div id="map"></div>
@@ -15,7 +15,21 @@
         <h4 class="pull-right">
           Ratings: <%= dish.price %>/5
         </h4>
+        
+       
+        
+         <form  action="/dishes/<%= dish._id %>/like/" method="POST">
+                <button class="btn btn-success" id="likebutton">Like</button>
+               
+              </form>
+              
+               <% if(currentUser){ %>
+               <form action="/dishes/<%=dish._id%>/like/<%=currentUser._id%>" method="POST">
+                <button class="btn btn-danger" id="unlikebutton">Unlike</button>
+              </form>
+              <% } %>
         <h4><a><%=dish.name%></a></h4>
+        <p><strong>Restaurant Name:</strong> <%= dish.restaurant%></p>
         <p><%= dish.description %></p>
         <p>
           <em>Submitted by: <%= dish.author.username %>, <%= moment(dish.createdAt).fromNow() %></em>
@@ -23,14 +37,14 @@
         <% if(currentUser && dish.author.id.equals(currentUser._id)){ %>
         <a class="btn btn-warning" href="/dishes/<%= dish._id %>/edit">Edit</a>
         <form action="/dishes/<%= dish._id %>?_method=DELETE" method="POST" class="delete-form">
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-danger" style="height: 50px;">Delete</button>
         </form>
         <% } %>
       </div>
     </div>
     <div class="well">
       <div class="text-right">
-        <a class="btn btn-success" href="/dishes/<%= dish._id %>/comments/new">Add New Comment</a>
+        <a class="btn btn-success" href="/dishes/<%= dish._id %>/comments/new">Add Comment</a>
       </div>
       <hr>
       <% dish.comments.forEach(function(comment){ %>
@@ -44,7 +58,7 @@
             <div class="pull-right">
               <a href="/dishes/<%=dish._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">EDIT</a>
               <form class="delete-form" action="/dishes/<%=dish._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                <button class="btn btn-xs btn-danger">DELETE</button>
+                <button class="btn btn-xs btn-danger"  style="height: 50px;">DELETE</button>
               </form>
             </div>
           <% } %>
@@ -56,7 +70,11 @@
   </div>
 </div>
 </div>
+
+
  <script>
+ 
+
   function initMap() {
     var lat = <%= dish.lat %>;
     var lng = <%= dish.lng %>;
@@ -82,7 +100,28 @@
       infowindow.open(map, marker);
     });
   }
+  
+ var likebutton = document.getElementById('likebutton');
+  var unlikebutton = document.getElementById('unlikebutton');
+  
+  unlikebutton.style.display = "none";
+likebutton.style.display = "block";
+
+var likes = <%-JSON.stringify(dish.likes)%>
+var currentUser = <%-JSON.stringify(currentUser)%>
+likes.forEach(function (like){
+  if(currentUser._id == like.author.id){
+   likebutton.style.display = "none";
+   unlikebutton.style.display = "block";
+  }
+})
+  
+  
  </script>
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIWIuVtNu7Y5oxMRvaBj6IQ-T5agL5TyQ&callback=initMap"></script>
+
+
+
+
 
 <% include ../partials/footer %> 

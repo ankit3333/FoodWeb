@@ -1,36 +1,44 @@
 <% include ../partials/header %>
+
+<div class = "container">
+    <body style= "background-image: url('https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixlib=rb-0.3.5&s=bf5b94b642532375b945fec883f6e8e2&auto=format&fit=crop&w=600&q=60">
+
     <div class="row">
-        <h1 style="text-align: center">Edit <%= dish.name %></h1>
+        <h1 style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Edit <%= dish.name %></h1>
         <div style="width: 30%; margin: 25px auto;">
             <form action="/dishes/<%=dish._id%>?_method=PUT" method="POST">
                 <div class="form-group">
-                    <label for="name">Name of the Dish:</label>
+                    <label for="name" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Name of the Dish:</label>
                     <input class="form-control" type="text" name="name" id="name" value="<%= dish.name %>">
                 </div>
                 <div class="form-group">
-                    <label for="image">Image Url:</label>
+                    <label for="image" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Image address/location:</label>
                     <input class="form-control" type="text" name="image" id="image" placeholder="https://images.unsplash.com/..." value="<%= dish.image %>">
                     
                 </div>
                 <div class="form-group">
-                    <label for="price">Ratings:</label>
+                    <label for="price" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Ratings:</label>
                     <input class="form-control" type="number" name="price" id="price" value="<%= dish.price %>" step="0.5" min="0.5" max="5">
                 </div>
                 <div class="form-group">
-                    <label for="description">Review:</label>
+                    <label for="description" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Review:</label>
                     <input class="form-control" type="text" name="description" id="description" value="<%= dish.description %>"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="location">Location</label>
+                    <label for="restaurant" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Restaurant Name:</label>
+                    <input class="form-control"  type="text" name="restaurant" id="restaurant" value="<%= dish.restaurant %>">
+                </div>
+                <div class="form-group">
+                    <label for="location" style="text-align: center; font-weight:bold;text-shadow: 2px 2px #FF5005;">Location</label>
                     <input class="form-control" type="text" name="location" id="location" value="<%= dish.location %>">
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Update!</button>
+                    <button class="btn btn-lg btn-primary btn-block">Update</button>
                 </div>
             </form>
-            <a href="/dishes">Go Back</a>
+           
         </div>
     </div>
+</div>
 <% include ../partials/footer %>
-

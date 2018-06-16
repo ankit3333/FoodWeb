@@ -1,20 +1,85 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700);
+
+a{
+
+}
+a:link {
+    
+     
+     padding: 15px 23px;
+}
+
+/* the link is visited*/
+a:visited {
+    /*color: none;*/
+    
+     padding: 15px 23px;
+}
+
+/* mouse pointer is over the link */
+
+
+/* the link is selected */
+a:active {
+    background-color: DodgerBlue;
+
+}
+
+#textboxid
+{
+    height:50px;
+    width: 250px;
+    font-size:14pt;
+}
+
+/*
+#jumboback
+{
+    background-color: rgb(139,136,120);
+    background-image: url("https://images.unsplash.com/photo-1506808547685-e2ba962ded60?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cd33fc6d316171dffb724ca209c06fc2&auto=format&fit=crop&w=600&q=60");
+}
+
+
+#divback
+{
+    background-image: url("https://images.unsplash.com/photo-1508900138639-8d3ff3f49d78?ixlib=rb-0.3.5&s=7ed5ff02f53ab2b3c03ef0fd20b1cafb&auto=format&fit=crop&w=600&q=60");
+}
+
+#homeback
+{
+    background-image: url("https://images.unsplash.com/photo-1461555806864-d8b528023e7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=714dd392992c74a0f0e96253a235ec22&auto=format&fit=crop&w=600&q=60");
+}
+
+*/
+
 .thumbnail img{
     width: 100%;
 }
-
 .thumbnail{
     padding:0;
 }
 
+
 .thumbnail .caption-full{
-    padding:9px;
+    padding:10px;
 }
 
 .delete-form{
     display: inline;
 }
 
+.buttonback: hover{
+    background-color: grey;
+    
+}
+
+#notFound{
+    background-color: white;
+}
+
 #map{
-    height: 400px;
+    height: 410px;
     width: 100%;
 }
+
