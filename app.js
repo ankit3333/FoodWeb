@@ -57,6 +57,6 @@ app.use("/dishes/:id/like",likeRoutes);
 
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT||8000, process.env.IP, function(){
    console.log("The FoodWeb Server Has Started!");
 });
