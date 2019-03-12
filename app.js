@@ -6,11 +6,10 @@ var express     = require("express"),
     passport    = require("passport"),
     localStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    nodemailer=require("nodemailer"),
     Dish  = require("./models/dish"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    Like        =require("./models/like"),
+    Like        = require("./models/like"),
     seedDB      = require("./seeds");
 
 var commentRoutes      = require("./routes/comments"),
@@ -18,7 +17,6 @@ var commentRoutes      = require("./routes/comments"),
     indexRoutes        = require("./routes/index"),
     contactRoutes=require("./routes/contact"),
     likeRoutes=require("./routes/like");
-    
 var url= process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(url);
 
@@ -54,10 +52,8 @@ app.use("/",indexRoutes);
 app.use("/dishes/:id/comments",commentRoutes);
 app.use("/dishes",dishRoutes);
 app.use("/contact",contactRoutes);
-app.use("/dishes/:id/like",likeRoutes);
+app.use("/like",likeRoutes);
 
-
-
-app.listen(process.env.PORT||3000, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The FoodWeb Server Has Started!");
 });
